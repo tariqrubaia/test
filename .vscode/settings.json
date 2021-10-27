@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/7fbeae66-01a6-422c-bf35-11321cb28124/resourceGroups/E-InvoicingSA/providers/Microsoft.Web/sites/einvdev",
+    "appService.deploySubpath": "dist\\angular-test"
+}
