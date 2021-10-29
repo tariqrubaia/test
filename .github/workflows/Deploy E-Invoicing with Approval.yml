@@ -17,14 +17,8 @@ env:
   rg-name: "Static Web Apps actions"
 
 jobs:
-   build:
-
-    runs-on: ubuntu-latest
-
-  
   
    deploy_staging:
-    needs: build
     runs-on: ubuntu-latest
     name: Deploy Job on staging
     environment:
