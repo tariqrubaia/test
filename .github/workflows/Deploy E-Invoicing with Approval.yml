@@ -21,6 +21,7 @@ jobs:
    deploy_staging:
     runs-on: ubuntu-latest
     name: Deploy on staging
+    
     environment:
       name: Staging
       url: https://white-pond-0651a3310.azurestaticapps.net
