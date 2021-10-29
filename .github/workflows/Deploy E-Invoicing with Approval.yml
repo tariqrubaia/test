@@ -18,13 +18,25 @@ env:
 
 jobs:
   
-   deploy_staging:
+   build:
+
     runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name : Compile
+ 
+ 
+   deploy_staging:
     name: Deploy on staging
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     
+    needs: build
+    runs-on: ubuntu-latest
+     
     environment:
       name: Staging
-      url: https://white-pond-0651a3310.azurestaticapps.net
+      url: 'https://white-pond-0651a3310.azurestaticapps.net'
 
     steps:
       - uses: actions/checkout@v2
@@ -48,13 +60,14 @@ jobs:
    
 
 deploy_prod:
+    name: Deploy on Production
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     needs: deploy_staging
     runs-on: ubuntu-latest
-    name: Deploy on Production
 
 environment:
       name: Production
-      url: https://lemon-coast-00bfebf10.azurestaticapps.net
+      url: 'https://lemon-coast-00bfebf10.azurestaticapps.net'
 
       steps:
       - uses: actions/checkout@v2
