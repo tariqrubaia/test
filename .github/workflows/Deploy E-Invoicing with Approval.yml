@@ -20,7 +20,7 @@ jobs:
   
    deploy_staging:
     runs-on: ubuntu-latest
-    name: Deploy Job on staging
+    name: Deploy on staging
     environment:
       name: Staging
       url: https://white-pond-0651a3310.azurestaticapps.net
@@ -49,9 +49,9 @@ jobs:
 deploy_prod:
     needs: deploy_staging
     runs-on: ubuntu-latest
+    name: Deploy on Production
 
-
-    environment:
+environment:
       name: Production
       url: https://lemon-coast-00bfebf10.azurestaticapps.net
 
