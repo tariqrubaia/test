@@ -17,21 +17,10 @@ env:
   rg-name: "Static Web Apps actions"
 
 jobs:
-  
-   build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name : Compile
- 
- 
    deploy_staging:
     name: Deploy on staging
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     
-    needs: build
     runs-on: ubuntu-latest
      
     environment:
@@ -50,26 +39,26 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
           slot-name: staging
+          skip_app_build: true
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/" # App source code path
           api_location: "" # Api source code path - optional
           output_location: "docs" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
-
    
 
-deploy_prod:
+   deploy_prod:
     name: Deploy on Production
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     needs: deploy_staging
     runs-on: ubuntu-latest
 
-environment:
+    environment:
       name: Production
       url: 'https://lemon-coast-00bfebf10.azurestaticapps.net'
 
-      steps:
+    steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
